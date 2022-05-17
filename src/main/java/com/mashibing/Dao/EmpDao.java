@@ -1,13 +1,21 @@
 package com.mashibing.Dao;
 
 import com.mashibing.bean.Emp;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 
 public interface EmpDao {
 
-    public void save(Emp emp);
+//    @Insert()
+    public Integer save(Emp emp);
+//    @Update()
     public Integer update(Emp emp);
+//    @Delete()
     public Integer delete(Integer empno);
+//    @Select()
     public Emp selectEmpByEmpno(Integer empno);
 
 }
