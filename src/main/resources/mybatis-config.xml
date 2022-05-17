@@ -2,17 +2,55 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration xmlns:context="http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
     <!--当需要引入外部的配置文件的时候，可以使用这样的方式-->
     <!--类似于 <context:property-placehoder location>location</context:property-placehoder>-->
     <!--resource:表示从当前项目的类路径中进行加载，如果用的是idea值得是resource资源目录下的配置文件-->
     <!--url：可以从当前文件系统的磁盘目录查找配置，也可以从网络上的资源进行引入-->
     <properties resource="db.properties"></properties>
+    <!--可以影响mybatis运行时的行为，包含N多个属性，需要怎么引入-->
+    <settings>
+        <!--开启驼峰标识验证-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
 
-    
+    <!--表示在引入实体类的名称时候，可以使用别名，而不需要写完全限定名-->
+    <typeAliases>
+        <!--具体的类都需要单独来写，如果有100个类，-->
+        <!--<typeAlias type="com.mashibing.bean.Emp" alias="Emp"></typeAlias>-->
+        <!--可以指定具体的包来保证输入实体类的时候，不需要写完全限定名-->
+        <package name="com.mashibing.bean"></package>
+    </typeAliases>
 
+
+    <!--在项目过程中，hi包含开发环境，测试环境，生产环境，有可能会用不同的数据源进行配置，在次配置文件中可以指定多个环境-->
+    <!--default:表示选择哪个环境作为运行时环境-->
     <environments default="development">
+        <!--配置具体的环境属性-->
+        <!--id:表示当前环境的名称-->
         <environment id="development">
+            <!--事务管理器，每一个数据源都需要配置具体的事务管理器
+            type：表示事务管理器的类型，
+            JDBC：使用jdbc原生的事务控制
+            managed：什么都没做
+            -->
+            <transactionManager type="JDBC"/>
+            <!--配置具体的数据源的类型
+            type：表示数据源的类型  pooled  使用数据库连接池
+            unpooled：每次都打开关闭一个链接
+            -->
+            <dataSource type="POOLED">
+                <!--链接数据库的时候需要添加必备的参数，一般是四个，如果是连接池的话，可以设置链接最大个数的相关信息-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+
+        <environment id="test">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="${driver}"/>
@@ -22,7 +60,11 @@
             </dataSource>
         </environment>
     </environments>
+
+
+
     <mappers>
         <mapper resource="EmpDao.xml"/>
+        <mapper resource="BookDao.xml"/>
     </mappers>
 </configuration>

@@ -1,4 +1,6 @@
+import com.mashibing.Dao.BookDao;
 import com.mashibing.Dao.EmpDao;
+import com.mashibing.bean.Book;
 import com.mashibing.bean.Emp;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -74,6 +76,20 @@ public class MyTest {
         Integer save = mapper.delete(1111);
         sqlSession.commit();
         System.out.println(save);
+        sqlSession.close();
+    }
+
+    @Test
+    public void test05() {
+
+        //获取与数据库相关的会话
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        获取对应映射接口对象
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+//        执行具体sql语句
+        Book book = mapper.selectBookById(1);
+        System.out.println(book);
+//        关闭会话
         sqlSession.close();
     }
 

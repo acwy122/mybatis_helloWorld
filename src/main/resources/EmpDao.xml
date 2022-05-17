@@ -5,7 +5,7 @@
 <mapper namespace="com.mashibing.Dao.EmpDao">
 
 
-    <select id="selectEmpByEmpno" resultType="com.mashibing.bean.Emp">
+    <select id="selectEmpByEmpno" resultType="Emp">
         select * from emp where empno = #{empno}
     </select>
 
