@@ -2,9 +2,14 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-
+<configuration xmlns:context="http://mybatis.org/dtd/mybatis-3-config.dtd">
+    <!--当需要引入外部的配置文件的时候，可以使用这样的方式-->
+    <!--类似于 <context:property-placehoder location>location</context:property-placehoder>-->
+    <!--resource:表示从当前项目的类路径中进行加载，如果用的是idea值得是resource资源目录下的配置文件-->
+    <!--url：可以从当前文件系统的磁盘目录查找配置，也可以从网络上的资源进行引入-->
     <properties resource="db.properties"></properties>
+
+    
 
     <environments default="development">
         <environment id="development">
