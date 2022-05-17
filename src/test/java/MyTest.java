@@ -35,7 +35,7 @@ public class MyTest {
 //        获取对应映射接口对象
         EmpDao mapper = sqlSession.getMapper(EmpDao.class);
 //        执行具体sql语句
-        Emp emp = mapper.selectEmpByEmpno(1111);
+        Emp emp = mapper.selectEmpByEmpno(2222);
         System.out.println(emp);
 //        关闭会话
         sqlSession.close();
