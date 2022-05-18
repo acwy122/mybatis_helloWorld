@@ -5,11 +5,11 @@
 <mapper namespace="com.mashibing.Dao.EmpDao">
 
 
-    <select id="selectEmpByEmpno" resultType="Emp">
+    <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
         select * from emp where empno = #{empno}
     </select>
 
-    <insert id="save">
+    <insert id="save" databaseId="oracle">
         insert into emp (empno,ename) values(#{empno},#{ename});
     </insert>
 
