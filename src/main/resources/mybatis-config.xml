@@ -85,12 +85,33 @@
     class：可以直接引入类的完全限定名，可以使用注解的方式进行使用
             如果不想以注解的方式进行引用？？
             如果想要class的方式引入配置文件，可以将xml文件添加到具体的类的同级目录下
+            如果是maven的项目的话，需要pom.xml添加如下配置，因为maven默认只会编译java文件，需要把xml文件也添加到指定目录中
 
+            <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+        或者在resources中创建同级的目录文件
+
+
+        如果需要引入多个配置文件可以直接定义包的名称
     -->
     <mappers>
         <!--<mapper resource="EmpDao.xml"/>-->
         <!--<mapper resource="BookDao.xml"/>-->
-        <mapper class="com.mashibing.Dao.BookDaoAnnotation"></mapper>
-        <mapper class="com.mashibing.Dao.BookDao"></mapper>
+        <!--<mapper class="com.mashibing.Dao.BookDaoAnnotation"></mapper>-->
+        <!--<mapper class="com.mashibing.Dao.BookDao"></mapper>-->
+        <!--如果需要引入多个配置文件可以直接定义包的名称
+        resource目录下配置的映射文件必须要具备相同的目录
+        -->
+        <package name="com.mashibing.Dao"></package>
     </mappers>
+
 </configuration>
