@@ -1,4 +1,5 @@
 import com.mashibing.Dao.BookDao;
+import com.mashibing.Dao.BookDaoAnnotation;
 import com.mashibing.Dao.EmpDao;
 import com.mashibing.bean.Book;
 import com.mashibing.bean.Emp;
@@ -86,6 +87,20 @@ public class MyTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 //        获取对应映射接口对象
         BookDao mapper = sqlSession.getMapper(BookDao.class);
+//        执行具体sql语句
+        Book book = mapper.selectBookById(1);
+        System.out.println(book);
+//        关闭会话
+        sqlSession.close();
+    }
+
+    @Test
+    public void test06() {
+
+        //获取与数据库相关的会话
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        获取对应映射接口对象
+        BookDaoAnnotation mapper = sqlSession.getMapper(BookDaoAnnotation.class);
 //        执行具体sql语句
         Book book = mapper.selectBookById(1);
         System.out.println(book);

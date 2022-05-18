@@ -32,6 +32,8 @@
     <!--当需要自定义对象工程的时候实现此标签，完成结果集到java对象实例化的过程-->
     <!--<objectFactory type=""></objectFactory>-->
 
+    <!--提供了不同的数据库厂商表示，当有数据库移植的时候，可以根据不同的数据库来执行不同的sql语句-->
+    <!--用来扩张数据库的移植性-->
     <databaseIdProvider type="DB_VENDOR">
         <property name="MySql" value="mysql"></property>
         <property name="SQL" value="sqlserver"></property>
@@ -76,9 +78,19 @@
     </environments>
 
 
+    <!--用来将mapper映射文件引入到配置文件中，方便程序启动的时候进行加载-->
+    <!--每次在进行填写的时候需要注意，写完xml映射之后，一定要添加到mybatis-config配置文件中
+    resource：从项目的类路径下加载对应的映射文件
+    url：从本地磁盘目录或者网络中引入映射文件
+    class：可以直接引入类的完全限定名，可以使用注解的方式进行使用
+            如果不想以注解的方式进行引用？？
+            如果想要class的方式引入配置文件，可以将xml文件添加到具体的类的同级目录下
 
+    -->
     <mappers>
-        <mapper resource="EmpDao.xml"/>
-        <mapper resource="BookDao.xml"/>
+        <!--<mapper resource="EmpDao.xml"/>-->
+        <!--<mapper resource="BookDao.xml"/>-->
+        <mapper class="com.mashibing.Dao.BookDaoAnnotation"></mapper>
+        <mapper class="com.mashibing.Dao.BookDao"></mapper>
     </mappers>
 </configuration>
