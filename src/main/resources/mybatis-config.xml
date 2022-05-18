@@ -23,6 +23,15 @@
         <package name="com.mashibing.bean"></package>
     </typeAliases>
 
+    <!--设置定义自己的类型处理器，mybatis中默认内置了很多类型处理器，一般不需要自己来实现-->
+    <!--<typeHandlers>-->
+        <!--<typeHandler handler=""></typeHandler>-->
+        <!--<package name=""/>-->
+    <!--</typeHandlers>-->
+
+    <!--当需要自定义对象工程的时候实现此标签，完成结果集到java对象实例化的过程-->
+    <objectFactory type=""></objectFactory>
+
 
     <!--在项目过程中，hi包含开发环境，测试环境，生产环境，有可能会用不同的数据源进行配置，在次配置文件中可以指定多个环境-->
     <!--default:表示选择哪个环境作为运行时环境-->
