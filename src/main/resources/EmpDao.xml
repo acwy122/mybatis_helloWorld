@@ -55,7 +55,7 @@
             @Param("empno") Integer empno, @Param("saly") Integer saly
             这样的方式其实是根据@Param来进行参数的获取
 
-
+        当需要返回的一个结果是一个map的集合的时候，同时map中包含多个对象，那么此时必须在dao方法上添加#MapKey注解，来表示到底是哪一个属性值作为key
 
     -->
     <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
@@ -78,9 +78,15 @@
         select  * from emp;
 
     </select>
+    <!--当需要返回的一个结果是一个map的集合的时候，同时map中包含多个对象，那么此时必须在dao方法上添加#MapKey注解，来表示到底是哪一个属性值作为key-->
     <select id="selectAll2" resultType="map">
         select  * from emp;
     </select>
+
+    <!--========================================================================-->
+
+    <!--如果需要编译一个自定义结果集，那么该如何进行处理-->
+
 
 
 </mapper>

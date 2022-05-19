@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mashibing.Dao.DogDao">
+
+    <!--在使用mybatis的时候，有些情况下需要我们封装结果集，一般情况下mybatis会帮我们自动封装，但是如果字段的值和类中的值不匹配的时候-->
+    <!--肯定要自定义了，字段值和属性值必须要一一对应
+        1、可以在sql语句中添加别名字段来保证赋值成功但是太麻烦了，而且不可重用
+        2、resultMap：不匹配的时候怎么处理
+
+
+    -->
+    自定义结果集
+    id：表示当前结果的唯一标识
+    type：
+    <resultMap id="myDog" type="com.mashibing.bean.Dog">
+        <result 
+
+    </resultMap>
+    <select id="selectById" resultType="com.mashibing.bean.Dog">
+        select * from dog where id = #{id}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into dag (id,name,age,gender) values(#{id},#{name},#{age},#{gender});
+    </insert>
+
+</mapper>
