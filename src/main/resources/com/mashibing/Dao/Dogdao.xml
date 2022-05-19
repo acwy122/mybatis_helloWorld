@@ -11,14 +11,21 @@
 
 
     -->
-    自定义结果集
-    id：表示当前结果的唯一标识
-    type：
+    <!--自定义结果集-->
+    <!--id：表示当前结果的唯一标识-->
+    <!--type：表示当前结果集的类型-->
     <resultMap id="myDog" type="com.mashibing.bean.Dog">
-        <result 
+        <!--id:表示指定对应的主键
+        property：实体类中对应的属性值
+        colum：表中字段的名称
+        -->
+        <id property="id" column="id"></id>
+        <result property="name" column="dname"></result>
+        <result property="age" column="dage"></result>
+        <result property="gender" column="dgender"></result>
 
     </resultMap>
-    <select id="selectById" resultType="com.mashibing.bean.Dog">
+    <select id="selectById" resultMap="myDog">
         select * from dog where id = #{id}
     </select>
 
