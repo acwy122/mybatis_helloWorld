@@ -54,6 +54,9 @@
             如果想要使用参数的时候，可以使用如下设置
             @Param("empno") Integer empno, @Param("saly") Integer saly
             这样的方式其实是根据@Param来进行参数的获取
+
+            
+
     -->
     <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
         select * from emp where empno = #{empno}
