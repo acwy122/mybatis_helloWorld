@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class MyTest {
 
@@ -104,6 +105,20 @@ public class MyTest {
 //        执行具体sql语句
         Book book = mapper.selectBookById(1);
         System.out.println(book);
+//        关闭会话
+        sqlSession.close();
+    }
+
+    @Test
+    public void test07() {
+
+        //获取与数据库相关的会话
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        获取对应映射接口对象
+        EmpDao mapper = sqlSession.getMapper(EmpDao.class);
+//        执行具体sql语句
+        Map<String, Emp> stringEmpMap = mapper.selectAll2();
+        System.out.println(stringEmpMap);
 //        关闭会话
         sqlSession.close();
     }

@@ -1,12 +1,10 @@
 package com.mashibing.Dao;
 
 import com.mashibing.bean.Emp;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface EmpDao {
@@ -21,4 +19,7 @@ public interface EmpDao {
     public Emp selectEmpByEmpno(Integer empno);
 
     public List<Emp> selectEmpList();
+
+    @MapKey("ename")
+    public Map<String,Emp> selectAll2();
 }

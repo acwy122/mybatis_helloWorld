@@ -55,7 +55,7 @@
             @Param("empno") Integer empno, @Param("saly") Integer saly
             这样的方式其实是根据@Param来进行参数的获取
 
-            
+
 
     -->
     <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
@@ -78,4 +78,9 @@
         select  * from emp;
 
     </select>
+    <select id="selectAll2" resultType="map">
+        select  * from emp;
+    </select>
+
+
 </mapper>
