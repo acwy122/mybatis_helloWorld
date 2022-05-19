@@ -5,6 +5,22 @@
 <mapper namespace="com.mashibing.Dao.EmpDao">
 
 
+    <!--inster  delete  update 分别用来标识不同类型的sql语句
+    id：用来标识跟dao接口中匹配的方法，必须与方法的名字一一对应上
+    flushCache：用来标识当前sql语句的结果是否进入二级缓存
+    timeout：表示超时时间
+    statementType：用来选择执行sql语句的方式
+        statement：最基本的jdbc的操作，用来表示一个sql语句，不能防止sql注入
+        preparestatment：采用预编译的方式，能够防止sql注入，设置参数的时候需要该对象来进行设置
+        callable：调用存储过程
+    useGenerateKey：是否使用主键Key，在插入或者修改的时候，会根据这个主键Key返回具体的实体类useGenerateKey="true" keyproperty="id"
+    当完成插入操作的时候，可以将自增生成的主键值返回到具体的对象
+    keyproperty：指定返回的主键要赋值到哪个具体属性中
+    在编写sql语句的过程中，无论是否配置了驼峰标识setting，都需要在sql语句中写具体的表的属性名，不能写对象名称
+    keycolumn：
+    databaseId：数据库厂商的标识
+    -->
+
     <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
         select * from emp where empno = #{empno}
     </select>
