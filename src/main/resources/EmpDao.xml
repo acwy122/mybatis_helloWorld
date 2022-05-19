@@ -21,6 +21,40 @@
     databaseId：数据库厂商的标识
     -->
 
+    <!--在mybatis中会包含非常多的查询操作，因此查询的参数会比较多
+    id：用来标识跟dao接口中匹配的方法，必须与方法的名字一一对应上
+    resultType：标识返回的结果类型，一般使用的并不多，此类型只能返回单一的对象，特别是关联查询的是哦胡，需要自定义结果集
+    resultMap：对外部 resultMap 的命名引用。结果映射是 MyBatis 最强大的特性，如果你对其理解透彻，许多复杂的映射问题都能迎刃而解。 resultType 和 resultMap 之间只能同时使用一个。
+    当返回的结果是一个集合的时候，并不需要resuleMap，只需要使用rewultType指定集合中的元素类型即可
+    resultMap,当进行关联查询的时候，在返回结果对象中还包含另一个对象的引用时，此时需要自定义结果集合，使用resultMap
+    -->
+
+    <!--参数的获取值的方式
+    每次在向sql语句中设置结果值的是哦胡，可以使用#{}  ${},那么哪种方式比较好
+    #{}：select * from emp where empno = ?
+    ${}：select * from emp where empno = 1
+
+    通过sql语句可以得出结论，
+    #{}的处理方式是使用了参数预编译的方式，不会引起sql注入的问题
+    ${}的处理方式，是直接拼接sql语句，得到对应的sql语句，会有sql注入的危险，
+    因此我们推荐#{}这种方式
+
+    但是要注意：${}也是有自己的使用场景的？
+    select * from ${t} where empno = #{empno}
+    当需要传入动态的表命，列名的时候需要使用${}，就是最直接的一个拼字符串的行为
+
+    当查询语句中包含多个参数的时候，我们因该如何获取需要的参数
+    1、如果是单个参数：
+            基本数据类型：#{}随便获取
+            引用数据类型：使用#{}获取值的时候，必须要使用对象的属性名
+    2、如果是多个参数：
+            我们在获取参数值的时候，就不能简单的使用#{}来获取了，只能通过arg0  arg1  param0   param1，这样的方式来获取参数的值
+            原因在于mybatis在传入多个参数的时候，会将这些参数的结果封装到map结构中，在map中key值就是arg0  arg1
+            param1   param2.....，这种方式非常不友好，没有办法根据属性名来获取具体的参数值
+            如果想要使用参数的时候，可以使用如下设置
+            @Param("empno") Integer empno, @Param("saly") Integer saly
+            这样的方式其实是根据@Param来进行参数的获取
+    -->
     <select id="selectEmpByEmpno" resultType="Emp" databaseId="mysql">
         select * from emp where empno = #{empno}
     </select>
@@ -36,4 +70,9 @@
     <delete id="delete">
         delete from  emp where empno = #{empno}
     </delete>
+
+    <select id="selectEmpList" resultType="Emp">
+        select  * from emp;
+
+    </select>
 </mapper>
